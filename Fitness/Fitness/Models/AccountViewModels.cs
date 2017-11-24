@@ -6,8 +6,8 @@ namespace Fitness.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "E-posta")]
+        public string EMail { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -29,11 +29,11 @@ namespace Fitness.Models
         public string Provider { get; set; }
 
         [Required]
-        [Display(Name = "Code")]
+        [Display(Name = "Kod")]
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Remember this browser?")]
+        [Display(Name = "Bu tarayıcıyı hatırla?")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -42,23 +42,23 @@ namespace Fitness.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "E-Posta")]
+        public string EMail { get; set; }
     }
 
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "E-Posta")]
         [EmailAddress]
-        public string Email { get; set; }
+        public string EMail { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parola")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Beni hatırla?")]
         public bool RememberMe { get; set; }
     }
 
@@ -66,18 +66,18 @@ namespace Fitness.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "E-Posta")]
+        public string EMail { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Parola minimum 6 karakter uzunluğunda olmalıdır.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parola")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Parola onayla")]
+        [Compare("Parola", ErrorMessage = "Parolalar eşleşmiyor.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -85,18 +85,18 @@ namespace Fitness.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "E-Posta")]
+        public string EMail { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Parola minimum 6 karakter uzunluğunda olmalıdır.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parola")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Parola onayla")]
+        [Compare("Password", ErrorMessage = "Parolalar eşleşmiyor.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -106,7 +106,7 @@ namespace Fitness.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "E-Posta")]
+        public string EMail { get; set; }
     }
 }
