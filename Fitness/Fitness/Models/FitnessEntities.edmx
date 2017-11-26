@@ -4,168 +4,270 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FitnessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FitnessTrialModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="FitnessClubOwners">
           <Key>
             <PropertyRef Name="ClubOwnerId" />
           </Key>
-          <Property Name="ClubOwnerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClubOwnerId" Type="int" Nullable="false" />
+          <Property Name="EMail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Surname" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="PhoneNumber" Type="char" MaxLength="15" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <EntityType Name="FitnessClubs">
           <Key>
             <PropertyRef Name="ClubId" />
           </Key>
-          <Property Name="ClubId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Adress" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="District" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="City" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Country" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="ClubOwnerId" Type="int" Nullable="false" />
+          <Property Name="ClubOwnerId" Type="int" />
         </EntityType>
         <EntityType Name="PersonelTrainers">
           <Key>
             <PropertyRef Name="PersonelTrainerId" />
           </Key>
-          <Property Name="PersonelTrainerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PersonelTrainerId" Type="int" Nullable="false" />
+          <Property Name="EMail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Surname" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="PhoneNumber" Type="char" MaxLength="15" />
-          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="ClubId" Type="int" />
         </EntityType>
         <EntityType Name="UserDetails">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Age" Type="tinyint" Nullable="false" />
-          <Property Name="UserWeight" Type="tinyint" Nullable="false" />
-          <Property Name="Height" Type="tinyint" Nullable="false" />
-          <Property Name="Gender" Type="char" MaxLength="6" Nullable="false" />
-          <Property Name="FatRate" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="MuscleRate" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="WaterRate" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="PersonelTrainerId" Type="int" Nullable="false" />
+          <Property Name="Age" Type="tinyint" />
+          <Property Name="UserWeight" Type="tinyint" />
+          <Property Name="Height" Type="tinyint" />
+          <Property Name="Gender" Type="char" MaxLength="6" />
+          <Property Name="FatRate" Type="char" MaxLength="4" />
+          <Property Name="MuscleRate" Type="char" MaxLength="4" />
+          <Property Name="WaterRate" Type="char" MaxLength="4" />
+          <Property Name="PersonelTrainerId" Type="int" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="EMail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Surname" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="64" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="FitnessModelStoreContainer">
+        <Association Name="FK_FitnessClubOwners_FitnessClubs">
+          <End Role="FitnessClubOwners" Type="Self.FitnessClubOwners" Multiplicity="0..1" />
+          <End Role="FitnessClubs" Type="Self.FitnessClubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FitnessClubOwners">
+              <PropertyRef Name="ClubOwnerId" />
+            </Principal>
+            <Dependent Role="FitnessClubs">
+              <PropertyRef Name="ClubOwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FitnessClubs_PersonelTrainers">
+          <End Role="FitnessClubs" Type="Self.FitnessClubs" Multiplicity="0..1" />
+          <End Role="PersonelTrainers" Type="Self.PersonelTrainers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FitnessClubs">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="PersonelTrainers">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserDetails">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FitnessTrialModelStoreContainer">
           <EntitySet Name="FitnessClubOwners" EntityType="Self.FitnessClubOwners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FitnessClubs" EntityType="Self.FitnessClubs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonelTrainers" EntityType="Self.PersonelTrainers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FitnessClubOwners_FitnessClubs" Association="Self.FK_FitnessClubOwners_FitnessClubs">
+            <End Role="FitnessClubOwners" EntitySet="FitnessClubOwners" />
+            <End Role="FitnessClubs" EntitySet="FitnessClubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FitnessClubs_PersonelTrainers" Association="Self.FK_FitnessClubs_PersonelTrainers">
+            <End Role="FitnessClubs" EntitySet="FitnessClubs" />
+            <End Role="PersonelTrainers" EntitySet="PersonelTrainers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserDetails" Association="Self.FK_Users_UserDetails">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserDetails" EntitySet="UserDetails" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="FitnessModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="FitnessTrialModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="FitnessClubOwners">
           <Key>
             <PropertyRef Name="ClubOwnerId" />
           </Key>
-          <Property Name="ClubOwnerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClubOwnerId" Type="Int32" Nullable="false" />
+          <Property Name="EMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FitnessClubs" Relationship="Self.FK_FitnessClubOwners_FitnessClubs" FromRole="FitnessClubOwners" ToRole="FitnessClubs" />
         </EntityType>
         <EntityType Name="FitnessClubs">
           <Key>
             <PropertyRef Name="ClubId" />
           </Key>
-          <Property Name="ClubId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="District" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Country" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ClubOwnerId" Type="Int32" Nullable="false" />
+          <Property Name="ClubOwnerId" Type="Int32" />
+          <NavigationProperty Name="FitnessClubOwners" Relationship="Self.FK_FitnessClubOwners_FitnessClubs" FromRole="FitnessClubs" ToRole="FitnessClubOwners" />
+          <NavigationProperty Name="PersonelTrainers" Relationship="Self.FK_FitnessClubs_PersonelTrainers" FromRole="FitnessClubs" ToRole="PersonelTrainers" />
         </EntityType>
         <EntityType Name="PersonelTrainers">
           <Key>
             <PropertyRef Name="PersonelTrainerId" />
           </Key>
-          <Property Name="PersonelTrainerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonelTrainerId" Type="Int32" Nullable="false" />
+          <Property Name="EMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="ClubId" Type="Int32" />
+          <NavigationProperty Name="FitnessClubs" Relationship="Self.FK_FitnessClubs_PersonelTrainers" FromRole="PersonelTrainers" ToRole="FitnessClubs" />
         </EntityType>
         <EntityType Name="UserDetails">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Age" Type="Byte" Nullable="false" />
-          <Property Name="UserWeight" Type="Byte" Nullable="false" />
-          <Property Name="Height" Type="Byte" Nullable="false" />
-          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="FatRate" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="MuscleRate" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="WaterRate" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="PersonelTrainerId" Type="Int32" Nullable="false" />
+          <Property Name="Age" Type="Byte" />
+          <Property Name="UserWeight" Type="Byte" />
+          <Property Name="Height" Type="Byte" />
+          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="FatRate" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="MuscleRate" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="WaterRate" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="PersonelTrainerId" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_UserDetails" FromRole="UserDetails" ToRole="Users" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="EMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="UserDetails" Relationship="Self.FK_Users_UserDetails" FromRole="Users" ToRole="UserDetails" />
         </EntityType>
-        <EntityContainer Name="FitnessEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_FitnessClubOwners_FitnessClubs">
+          <End Role="FitnessClubOwners" Type="Self.FitnessClubOwners" Multiplicity="0..1" />
+          <End Role="FitnessClubs" Type="Self.FitnessClubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FitnessClubOwners">
+              <PropertyRef Name="ClubOwnerId" />
+            </Principal>
+            <Dependent Role="FitnessClubs">
+              <PropertyRef Name="ClubOwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FitnessClubs_PersonelTrainers">
+          <End Role="FitnessClubs" Type="Self.FitnessClubs" Multiplicity="0..1" />
+          <End Role="PersonelTrainers" Type="Self.PersonelTrainers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FitnessClubs">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="PersonelTrainers">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserDetails">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FitnessTrialEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="FitnessClubOwners" EntityType="Self.FitnessClubOwners" />
           <EntitySet Name="FitnessClubs" EntityType="Self.FitnessClubs" />
           <EntitySet Name="PersonelTrainers" EntityType="Self.PersonelTrainers" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" />
           <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_FitnessClubOwners_FitnessClubs" Association="Self.FK_FitnessClubOwners_FitnessClubs">
+            <End Role="FitnessClubOwners" EntitySet="FitnessClubOwners" />
+            <End Role="FitnessClubs" EntitySet="FitnessClubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FitnessClubs_PersonelTrainers" Association="Self.FK_FitnessClubs_PersonelTrainers">
+            <End Role="FitnessClubs" EntitySet="FitnessClubs" />
+            <End Role="PersonelTrainers" EntitySet="PersonelTrainers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserDetails" Association="Self.FK_Users_UserDetails">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserDetails" EntitySet="UserDetails" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FitnessModelStoreContainer" CdmEntityContainer="FitnessEntities">
+        <EntityContainerMapping StorageEntityContainer="FitnessTrialModelStoreContainer" CdmEntityContainer="FitnessTrialEntities">
           <EntitySetMapping Name="FitnessClubOwners">
-            <EntityTypeMapping TypeName="FitnessModel.FitnessClubOwners">
+            <EntityTypeMapping TypeName="FitnessTrialModel.FitnessClubOwners">
               <MappingFragment StoreEntitySet="FitnessClubOwners">
                 <ScalarProperty Name="ClubOwnerId" ColumnName="ClubOwnerId" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FitnessClubs">
-            <EntityTypeMapping TypeName="FitnessModel.FitnessClubs">
+            <EntityTypeMapping TypeName="FitnessTrialModel.FitnessClubs">
               <MappingFragment StoreEntitySet="FitnessClubs">
                 <ScalarProperty Name="ClubId" ColumnName="ClubId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -178,21 +280,20 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PersonelTrainers">
-            <EntityTypeMapping TypeName="FitnessModel.PersonelTrainers">
+            <EntityTypeMapping TypeName="FitnessTrialModel.PersonelTrainers">
               <MappingFragment StoreEntitySet="PersonelTrainers">
                 <ScalarProperty Name="PersonelTrainerId" ColumnName="PersonelTrainerId" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="ClubId" ColumnName="ClubId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserDetails">
-            <EntityTypeMapping TypeName="FitnessModel.UserDetails">
+            <EntityTypeMapping TypeName="FitnessTrialModel.UserDetails">
               <MappingFragment StoreEntitySet="UserDetails">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
@@ -207,14 +308,13 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="FitnessModel.Users">
+            <EntityTypeMapping TypeName="FitnessTrialModel.Users">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

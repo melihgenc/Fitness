@@ -13,10 +13,10 @@ namespace Fitness.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FitnessEntities : DbContext
+    public partial class FitnessTrialEntities : DbContext
     {
-        public FitnessEntities()
-            : base("name=FitnessEntities")
+        public FitnessTrialEntities()
+            : base("name=FitnessTrialEntities")
         {
         }
     

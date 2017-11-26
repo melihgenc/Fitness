@@ -15,6 +15,9 @@ namespace Fitness.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        FitnessTrialEntities database = new FitnessTrialEntities();
+        ApplicationDbContext memberdb = new ApplicationDbContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -57,6 +60,11 @@ namespace Fitness.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -86,7 +94,7 @@ namespace Fitness.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Geçersiz kullanıcı adı veya parola.");
                     return View(model);
             }
         }
@@ -139,6 +147,11 @@ namespace Fitness.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 

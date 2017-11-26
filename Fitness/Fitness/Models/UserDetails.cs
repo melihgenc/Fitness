@@ -15,13 +15,15 @@ namespace Fitness.Models
     public partial class UserDetails
     {
         public int UserId { get; set; }
-        public byte Age { get; set; }
-        public byte UserWeight { get; set; }
-        public byte Height { get; set; }
+        public Nullable<byte> Age { get; set; }
+        public Nullable<byte> UserWeight { get; set; }
+        public Nullable<byte> Height { get; set; }
         public string Gender { get; set; }
         public string FatRate { get; set; }
         public string MuscleRate { get; set; }
         public string WaterRate { get; set; }
-        public int PersonelTrainerId { get; set; }
+        public Nullable<int> PersonelTrainerId { get; set; }
+    
+        public virtual Users Users { get; set; }
     }
 }

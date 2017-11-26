@@ -15,12 +15,13 @@ namespace Fitness.Models
     public partial class PersonelTrainers
     {
         public int PersonelTrainerId { get; set; }
-        public string Username { get; set; }
+        public string EMail { get; set; }
+        public string Password { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public int ClubId { get; set; }
+        public Nullable<int> ClubId { get; set; }
+    
+        public virtual FitnessClubs FitnessClubs { get; set; }
     }
 }
