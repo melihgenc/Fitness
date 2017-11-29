@@ -174,10 +174,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\FitnessController.cs" />
+    <Compile Include="Areas\fitness\Controllers\FitnessController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Areas\member\Controllers\MemberController.cs" />
     <Compile Include="Models\FitnessClubOwners.cs">
       <DependentUpon>FitnessEntities.tt</DependentUpon>
     </Compile>
@@ -316,6 +316,34 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\admin\Content\" />
+    <Folder Include="Areas\admin\Controllers\" />
+    <Folder Include="Areas\admin\fonts\" />
+    <Folder Include="Areas\admin\Models\" />
+    <Folder Include="Areas\admin\Scripts\" />
+    <Folder Include="Areas\admin\Views\" />
+    <Folder Include="Areas\fitness\Content\" />
+    <Folder Include="Areas\fitness\fonts\" />
+    <Folder Include="Areas\fitness\Models\" />
+    <Folder Include="Areas\fitness\Scripts\" />
+    <Folder Include="Areas\fitness\Views\" />
+    <Folder Include="Areas\home\Content\" />
+    <Folder Include="Areas\home\Controllers\" />
+    <Folder Include="Areas\home\fonts\" />
+    <Folder Include="Areas\home\Models\" />
+    <Folder Include="Areas\home\Scripts\" />
+    <Folder Include="Areas\home\Views\" />
+    <Folder Include="Areas\member\Content\" />
+    <Folder Include="Areas\member\fonts\" />
+    <Folder Include="Areas\member\Models\" />
+    <Folder Include="Areas\member\Scripts\" />
+    <Folder Include="Areas\member\Views\" />
+    <Folder Include="Areas\portal\Content\" />
+    <Folder Include="Areas\portal\Controllers\" />
+    <Folder Include="Areas\portal\fonts\" />
+    <Folder Include="Areas\portal\Models\" />
+    <Folder Include="Areas\portal\Scripts\" />
+    <Folder Include="Areas\portal\Views\" />
     <Folder Include="Content\bootstrap\" />
     <Folder Include="Content\font-awesome\" />
     <Folder Include="Content\jquery\" />
