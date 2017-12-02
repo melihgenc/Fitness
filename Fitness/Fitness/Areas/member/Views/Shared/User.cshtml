@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+}
+
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li class="page-scroll">
+                    @Html.ActionLink("Ana Sayfa", "Index", "Member", routeValues: null, htmlAttributes: new { id = "memberIndex" })
+                </li>
+                <li class="page-scroll">
+                    <a href="@Url.Action("Manage","Account")" class="btn btn-ads btn-block">@User.Identity.GetUserName()</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Çıkış</a>
+                </li>
+            </ul>
+        </div>
+                <!-- /.navbar-collapse -->
+    }
+}
+
+else
+{
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="hidden">
+                <a href="#page-top"></a>
+            </li>
+            <li class="page-scroll">
+                @Html.ActionLink("Ana Sayfa", "Index", "Member")
+            </li>
+            <li class="page-scroll">
+                @Html.ActionLink("Kayıt Ol", "Register", "Account")
+            </li>
+            <li class="page-scroll">
+                @Html.ActionLink("Oturum Aç", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+            </li>
+        </ul>
+    </div>
+                        }
+
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#giris").click(function () {
+
+            $.post('@Url.Action("Login","Account")').done(function () { }).fail(function () { });
+        });
+
+    });
+
+</script>

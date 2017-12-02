@@ -173,7 +173,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\member\BundleConfig.cs" />
+    <Compile Include="Areas\member\App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\fitness\Controllers\FitnessController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -223,8 +223,10 @@
     <Content Include="Areas\member\Content\bootstrap-theme.min.css" />
     <Content Include="Areas\member\Content\bootstrap.css" />
     <Content Include="Areas\member\Content\bootstrap.min.css" />
-    <Content Include="Areas\member\Content\bootstrap\bootstrap.css" />
-    <Content Include="Areas\member\Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Areas\member\Content\bootstrap\css\bootstrap.css" />
+    <Content Include="Areas\member\Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Areas\member\Content\bootstrap\js\bootstrap.js" />
+    <Content Include="Areas\member\Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Areas\member\Content\font-awesome\css\font-awesome.css" />
     <Content Include="Areas\member\Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Areas\member\Content\jquery\jquery.js" />
@@ -381,6 +383,21 @@
     <Content Include="Areas\member\Content\font-awesome\scss\_variables.scss" />
     <Content Include="Areas\member\Content\font-awesome\scss\font-awesome.scss" />
     <Content Include="Areas\member\Content\theme\img\Thumbs.db" />
+    <Content Include="Areas\member\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\member\Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Areas\member\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\member\Views\Shared\Lockout.cshtml" />
+    <Content Include="Areas\member\Views\Member\Financial.cshtml" />
+    <Content Include="Areas\member\Views\Member\Index.cshtml" />
+    <Content Include="Areas\member\Views\Member\MemberProfile.cshtml" />
+    <Content Include="Areas\member\Views\Member\Settings.cshtml" />
+    <Content Include="Areas\member\Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\member\Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\member\Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\member\Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\member\Content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\member\Views\Shared\User.cshtml" />
+    <Content Include="Areas\member\Views\web.config" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -433,10 +450,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Member\Index.cshtml" />
-    <Content Include="Views\Member\MemberProfile.cshtml" />
-    <Content Include="Views\Member\Financial.cshtml" />
-    <Content Include="Views\Member\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -451,23 +464,14 @@
     <Folder Include="Areas\fitness\Models\" />
     <Folder Include="Areas\fitness\Scripts\" />
     <Folder Include="Areas\fitness\Views\" />
-    <Folder Include="Areas\home\Content\" />
-    <Folder Include="Areas\home\Controllers\" />
-    <Folder Include="Areas\home\fonts\" />
-    <Folder Include="Areas\home\Models\" />
-    <Folder Include="Areas\home\Scripts\" />
-    <Folder Include="Areas\home\Views\" />
-    <Folder Include="Areas\member\fonts\" />
-    <Folder Include="Areas\member\Models\" />
+    <Folder Include="Areas\member\Models\fonts\" />
     <Folder Include="Areas\member\Scripts\" />
-    <Folder Include="Areas\member\Views\" />
     <Folder Include="Areas\portal\Content\" />
     <Folder Include="Areas\portal\Controllers\" />
     <Folder Include="Areas\portal\fonts\" />
     <Folder Include="Areas\portal\Models\" />
     <Folder Include="Areas\portal\Scripts\" />
     <Folder Include="Areas\portal\Views\" />
-    <Folder Include="Views\Fitness\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
