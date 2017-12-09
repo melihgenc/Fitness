@@ -104,7 +104,7 @@ namespace Fitness.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Lütfen e-posta adresini doğru giriniz.")]
         [EmailAddress]
         [Display(Name = "E-Posta")]
         public string EMail { get; set; }

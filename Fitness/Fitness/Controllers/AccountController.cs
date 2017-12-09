@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Fitness.Models;
+using System.Security.Cryptography;
+using System.Text;
+using System.Net.Mail;
 
 namespace Fitness.Controllers
 {
@@ -53,6 +56,23 @@ namespace Fitness.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        public static string MD5Hashing(string HashingPassword)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+
+            byte[] btr = Encoding.UTF8.GetBytes(HashingPassword);
+            btr = md5.ComputeHash(btr);
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (byte ba in btr)
+            {
+                sb.Append(ba.ToString("x2").ToLower());
+            }
+
+            return sb.ToString();
         }
 
         //
@@ -215,23 +235,45 @@ namespace Fitness.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.EMail);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                MailMessage email = new MailMessage();
+                email.From = new MailAddress("melihgenc123@gmail.com");
+                email.To.Add(model.EMail);
+                email.Subject = "Survey reset password";
+                //  eposta.Body = "mesaj içeriği";
+
+                string eMailDB = (from u in database.Users where u.EMail == model.EMail select u.EMail).FirstOrDefault();
+                if (String.IsNullOrEmpty(eMailDB))
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    return View();
+                }
+                string ID = (from u in memberdb.Users where u.Email == eMailDB select u.Id).FirstOrDefault();
+
+                UserManager.RemovePassword(ID);
+                bool passwordAvailable = UserManager.HasPassword(ID);
+                if (passwordAvailable == false)
+                {
+                    Random r = new Random();
+                    int generatedPassword = r.Next(100000, 999999);
+                    UserManager.AddPassword(ID, generatedPassword.ToString());
+                    bool varmi = UserManager.HasPassword(ID);
+                    if (varmi == true)
+                    {
+                        email.Body = generatedPassword.ToString();
+                    }
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
-            }
+                using (var smtp = new SmtpClient())
+                {
+                    smtp.Credentials = new System.Net.NetworkCredential("melihgenc123@gmail.com", "gfbmlh123");
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 465;
+                    smtp.EnableSsl = true;
+                    smtp.Send(email);
+                }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
         }
 
         //

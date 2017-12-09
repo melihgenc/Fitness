@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Fitness.Controllers
+namespace Fitness.Areas.fitness.Controllers
 {
     public class FitnessController : Controller
     {

@@ -173,7 +173,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\member\memberAreaRegistration.cs" />
     <Compile Include="Areas\member\App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\signup\Controllers\SignupController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\fitness\Controllers\FitnessController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -232,7 +234,6 @@
     <Content Include="Areas\member\Content\jquery\jquery.js" />
     <Content Include="Areas\member\Content\jquery\jquery.min.js" />
     <Content Include="Areas\member\Content\PagedList.css" />
-    <Content Include="Areas\member\Content\Site.css" />
     <Content Include="Areas\member\Content\theme\css\freelancer.css" />
     <Content Include="Areas\member\Content\theme\css\freelancer.min.css" />
     <Content Include="Areas\member\Content\theme\img\portfolio\cabin.png" />
@@ -248,6 +249,24 @@
     <Content Include="Areas\member\Content\theme\js\jqBootstrapValidation.js" />
     <Content Include="Areas\member\Content\toastr.css" />
     <Content Include="Areas\member\Content\toastr.min.css" />
+    <Content Include="Areas\member\Scripts\bootstrap.js" />
+    <Content Include="Areas\member\Scripts\bootstrap.min.js" />
+    <None Include="Areas\member\Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Areas\member\Scripts\jquery-3.2.1.js" />
+    <Content Include="Areas\member\Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Areas\member\Scripts\jquery-3.2.1.slim.js" />
+    <Content Include="Areas\member\Scripts\jquery-3.2.1.slim.min.js" />
+    <None Include="Areas\member\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Areas\member\Scripts\jquery.validate.js" />
+    <Content Include="Areas\member\Scripts\jquery.validate.min.js" />
+    <Content Include="Areas\member\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Areas\member\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Areas\member\Scripts\modernizr-2.6.2.js" />
+    <Content Include="Areas\member\Scripts\respond.js" />
+    <Content Include="Areas\member\Scripts\respond.min.js" />
+    <Content Include="Areas\member\Scripts\toastr.js" />
+    <Content Include="Areas\member\Scripts\toastr.min.js" />
+    <None Include="Areas\member\Scripts\_references.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -286,7 +305,6 @@
       <LastGenOutput>FitnessEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <EntityDeploy Include="Models\FitnessEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>FitnessEntities.Designer.cs</LastGenOutput>
@@ -398,6 +416,10 @@
     <Content Include="Areas\member\Content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Areas\member\Views\Shared\User.cshtml" />
     <Content Include="Areas\member\Views\web.config" />
+    <Content Include="Areas\member\Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Areas\member\Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Areas\member\Views\Member\Membership.cshtml" />
+    <Content Include="Areas\member\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -464,14 +486,18 @@
     <Folder Include="Areas\fitness\Models\" />
     <Folder Include="Areas\fitness\Scripts\" />
     <Folder Include="Areas\fitness\Views\" />
-    <Folder Include="Areas\member\Models\fonts\" />
-    <Folder Include="Areas\member\Scripts\" />
+    <Folder Include="Areas\member\fonts\" />
     <Folder Include="Areas\portal\Content\" />
     <Folder Include="Areas\portal\Controllers\" />
     <Folder Include="Areas\portal\fonts\" />
     <Folder Include="Areas\portal\Models\" />
     <Folder Include="Areas\portal\Scripts\" />
     <Folder Include="Areas\portal\Views\" />
+    <Folder Include="Areas\signup\Content\" />
+    <Folder Include="Areas\signup\fonts\" />
+    <Folder Include="Areas\signup\Models\" />
+    <Folder Include="Areas\signup\Scripts\" />
+    <Folder Include="Areas\signup\Views\Signup\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

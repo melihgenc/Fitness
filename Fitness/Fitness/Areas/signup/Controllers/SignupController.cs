@@ -4,17 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Fitness.Areas.member.Controllers
+namespace Fitness.Areas.signup.Controllers
 {
-    public class MemberController : Controller
+    public class SignupController : Controller
     {
-        // GET: Member
+        // GET: signup/Signup
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult MemberProfile()
         {
             return View();
         }
@@ -24,15 +19,19 @@ namespace Fitness.Areas.member.Controllers
             return View();
         }
 
-        public ActionResult Financial()
+        public ActionResult PersonelInformation()
         {
             return View();
         }
 
-        public ActionResult Settings()
+        public ActionResult Health()
         {
             return View();
         }
 
+        public ActionResult Payment()
+        {
+            return View();
+        }
     }
 }
